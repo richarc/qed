@@ -1,6 +1,13 @@
 ## Project guidelines
 This project is a quantum computing simulator written in the Elixir language and using the Elixir Nx library for numerical computation support when complex numbers are needed or matrix, vector or tensor calulations are required.
 
+Qubit: The Qubit module holds the state of a Qubit and define core functions for setting the Qubit state. The qubit is always initialised in the ket0 (|0>) state.
+The state of the Qubit may be changed by the Qubit.new(alpha, beta) funtion
+the qubit state is is a Nx.Tensor of two complex values representing the qubit probabaility amplitudes.
+When setting the state we must check that the values meet the normalisation contraints for qubits.
+
+QuantumCircuit: The QuantumCircuit module holds the state of the circuit. The circuite module contans a list of qubits assigned to the circuit, a list of classical buits assigned to the circuit, the State Vector for the circuit and the instruction list for the circuit. The instruction list is a list of opperators that are applied to the circuit.
+
 ## Elixir guidelines
 
 - Elixir lists **do not support index based access via the access syntax**

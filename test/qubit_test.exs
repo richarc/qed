@@ -11,7 +11,7 @@ defmodule QED.QubitTest do
   end
 
   test "ket1/1 sets the qubit state to |1>" do
-    qubit = Qubit.new() |> Qubit.ket1()
+    qubit = Qubit.ket1()
     assert qubit.state == Nx.tensor([Complex.new(0, 0), Complex.new(1, 0)])
     assert Qubit.normalized?(qubit)
   end
@@ -35,7 +35,7 @@ defmodule QED.QubitTest do
   end
 
   test "normalized?/1 returns false for non-normalized state" do
-    qubit = Qubit.new(Complex.new(1, 0), Complex.new(1, 0))
+    qubit = %QED.Qubit{state: Nx.tensor([Complex.new(1, 0), Complex.new(1, 0)])}
     refute Qubit.normalized?(qubit)
   end
 end
