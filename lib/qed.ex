@@ -15,4 +15,6 @@ defmodule QED do
   defdelegate cx(circuit, qubit_index1, qubit_index2), to: Operators
   defdelegate measure(circuit, qubit_index, classical_bit_index), to: Operators
   defdelegate draw(circuit), to: Draw, as: :circuit
+  defdelegate run(circuit, shots), to: QED.Simulation
+  defdelegate plot(results), to: QED.Draw
 end

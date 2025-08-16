@@ -21,7 +21,9 @@ defmodule QED.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:nx, "~> 0.10"}
+      {:nx, "~> 0.10"},
+      {:vega_lite, "~> 0.1"},
+      {:jason, "~> 1.2"}
     ]
   end
 end

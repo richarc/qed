@@ -126,4 +126,23 @@ defmodule QED.Draw do
       "<line x1=\"#{x + gate_width / 2}\" y1=\"#{y_qubit + gate_height}\" x2=\"#{x + gate_width / 2}\" y2=\"#{y_classical + gate_height / 2}\" stroke=\"black\" />"
     ]
   end
+
+  @doc """
+  Generates a plot of the probabilities from a simulation run.
+  """
+  def plot(results) when is_map(results) do
+    total_shots = Enum.sum(Map.values(results))
+
+    data = 
+      Enum.map(results, fn {state, count} ->
+        %{state: state, probability: count / total_shots}
+      end)
+
+    VegaLite.new(width: 400, height: 300, title: "Simulation Results")
+    |> VegaLite.data_from_values(data)
+    |> VegaLite.mark(:bar)
+    |> VegaLite.encode_field(:x, "state", type: :nominal, title: "State")
+    |> VegaLite.encode_field(:y, "probability", type: :quantitative, title: "Probability")
+    |> Jason.encode!(pretty: true)
+  end
 end

@@ -7,15 +7,25 @@ defmodule QED.Qmath do
   Returns a tensor of shape {m * n}.
   We provide a defualt value for the second argument for the case when only one value is provided.
   """
-  defn kronecker_product(u, v \\ Nx.tensor([1])) do
-    {m} = Nx.shape(u)
-    {n} = Nx.shape(v)
+  defn kronecker_product(a, b) do
+    a_rank = Nx.rank(a)
+    b_rank = Nx.rank(b)
 
-    # Reshape u to {m, 1} and v to {1, n} so Nx multiplies each element of u by all of v
-    u_expanded = Nx.reshape(u, {m, 1})
-    v_expanded = Nx.reshape(v, {1, n})
+    {a_rows, a_cols} = if a_rank == 1, do: {elem(Nx.shape(a), 0), 1}, else: Nx.shape(a)
+    {b_rows, b_cols} = if b_rank == 1, do: {elem(Nx.shape(b), 0), 1}, else: Nx.shape(b)
 
-    # Multiply then flatten back to a vector
-    Nx.flatten(Nx.multiply(u_expanded, v_expanded))
+    a_reshaped = Nx.reshape(a, {a_rows, a_cols})
+    b_reshaped = Nx.reshape(b, {b_rows, b_cols})
+
+    result = 
+      Nx.reshape(a_reshaped, {a_rows, 1, a_cols, 1})
+      |> Nx.multiply(Nx.reshape(b_reshaped, {1, b_rows, 1, b_cols}))
+      |> Nx.reshape({a_rows * b_rows, a_cols * b_cols})
+
+    if a_rank == 1 and b_rank == 1 do
+      Nx.flatten(result)
+    else
+      result
+    end
   end
 end
