@@ -21,3 +21,6 @@ qed-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# not this
+GEMINI.md

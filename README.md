@@ -4,6 +4,8 @@ A Quantum Computing Simulator built in Elixir.
 
 QED is a simple quantum computing simulator that allows you to build and simulate quantum circuits. It provides a simple API for creating circuits, adding gates, and running simulations.
 
+Note: this is a very early and rough and is a project for me to learn Elixir and nx and not intended for any serious use (not yet any way)
+
 ## Application Structure
 
 The application is structured into several modules:
