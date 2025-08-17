@@ -66,7 +66,7 @@ To use QED in your project, add it to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:qed, git: "https://github.com/richard-garcia/qed.git"}
+    {:qed, git: "https://github.com/richarc/qed.git"}
   ]
 end
 ```
